@@ -458,4 +458,11 @@ def admin_cohorts():
 if __name__ == "__main__":
     # debug=True gives auto-reload + readable error pages during development.
     # Turn this off (or use a production server like gunicorn) before deploying.
-    app.run(debug=True)
+    import os
+    app.run(
+        debug=True,
+        host=os.getenv("FLASK_HOST", "127.0.0.1"),
+        port=int(os.getenv("FLASK_PORT", 5000)),
+        use_reloader=False  # Disable reloader for Streamlit Cloud compatibility
+    )
+
